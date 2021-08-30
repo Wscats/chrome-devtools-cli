@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 26 % 26 = 0
+            // parseInt(26 / 26) - 1 = 0
+            // 00
+            // AA
+
+            // 27
+            // 01
+            // AB
+            let num2letter = (index) => {
+                let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                if (index <= 25) {
+                    return letter[index];
+                } else {
+                    let l1 = parseInt(index / 26) - 1;
+                    let l2 = index % 26;
+                    return letter[l1]+letter[l2]
+                    // console.log(parseInt(index / 26) - 1);
+                    // console.log(index % 26);
+                    // console.log(letter[parseInt(index / 26) - 1]);
+                    // console.log(letter[index % 26]);
+                    // 26 % 26 = 0;
+                    // parseInt(26 / 26) - 1 = 0;
+                }
+            };
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[25];
+            console.log(num2letter(26));
+        </script>
+    </body>
+</html>

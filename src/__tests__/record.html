@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <!-- <style>
+            video {
+                width: 1000px;
+                height: 500px;
+            }
+        </style> -->
+        <!-- <video autoplay id="video">Video stream not available.</video> -->
+        <script src="./MediaStreamRecorder.js"></script>
+        <script>
+            let video = document.createElement('video');
+            video.style.width = '1000px';
+            video.style.height = '500px';
+            video.autoplay = true;
+            // let video = document.getElementById('video');
+            navigator.mediaDevices
+                .getDisplayMedia({
+                    video: true,
+                    // audio: true
+                })
+                .then(
+                    (stream) => {
+                        // we have a stream, attach it to a feedback video element
+                        console.log(stream);
+                        video.srcObject = stream;
+
+                        var mediaRecorder = new MediaStreamRecorder(stream);
+                        mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
+                        mediaRecorder.ondataavailable = function(blob) {
+                            // POST/PUT "Blob" using FormData/XHR2
+                            var blobURL = URL.createObjectURL(blob);
+                            document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+                        };
+                        mediaRecorder.start(3000);
+                    },
+                    (error) => {
+                        console.log('Unable to acquire screen capture', error);
+                    }
+                );
+            document.body.appendChild(video);
+        </script>
+    </body>
+</html>

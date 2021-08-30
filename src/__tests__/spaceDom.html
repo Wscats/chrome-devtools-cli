@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <table></table>
+        <table>
+            <tr>
+                <td>值1</td>
+                <td>值2</td>
+                <td>值3</td>
+            </tr>
+            <tr class="for-tr">
+                <td>aaa</td>
+                <td>bbb</td>
+                <td>ccc</td>
+            </tr>
+            <tr class="for-tr">
+                <td>ddd</td>
+                <td>eee</td>
+                <td>fff</td>
+            </tr>
+            <tr class="for-tr">
+                <td>ggg</td>
+                <td>hhh</td>
+                <td>kkk</td>
+            </tr>
+            <tr class="for-tr">
+                <td><section></section></td>
+                <td>ppp</td>
+                <td>ooo</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <p></p>
+    </body>
+    <script type="text/javascript">
+        function traverseNodes(node) {
+            // 判断是否是元素节点
+            if (node.nodeType === 1) {
+                // 判断该元素节点是否有子节点
+                if (node.childNodes.length) {
+                    // 得到所有的子节点
+                    let sonnodes = node.childNodes;
+                    // 遍历所有的子节点
+                    for (let i = 0; i < sonnodes.length; i++) {
+                        // 找出有空格字符的节点 <p> </p>
+                        if (!node.innerText && !node.childNodes.length) {
+                            console.log(node, node.childNodes.length);
+                        }
+                        // 得到具体的某个子节点
+                        let sonnode = sonnodes.item(i);
+                        // 递归遍历
+                        traverseNodes(sonnode);
+                    }
+                } else {
+                    console.log(node, node.childNodes.length);
+                }
+            }
+        }
+        traverseNodes(document.body);
+    </script>
+</html>

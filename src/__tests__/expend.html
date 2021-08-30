@@ -1,0 +1,63 @@
+<script>
+    
+    // let arr = [
+    //     {
+    //         isSheet: false,
+    //         sheetId: 'BB08J2',
+    //         startRowIndex: 0,
+    //         endRowIndex: 1,
+    //         startColIndex: 0,
+    //         endColIndex: 1
+    //     }
+    // ];
+    // console.log(arr);
+
+    let arr = SpreadsheetApp.view.getSelection().rangeSelections;
+    // 这个方法主要就是把选中表格范围的数据的每一条详情遍历取出来
+    arr.map((item) => {
+        // 行起始位置
+        let startRowIndex = item.startRowIndex;
+        // 列起始位置
+        let startColIndex = item.startColIndex;
+        item.children = [];
+        let rowLength = item.endRowIndex - startRowIndex > 0 ? item.endRowIndex - startRowIndex : 0;
+        let colLength = item.endColIndex - startColIndex > 0 ? item.endColIndex - startColIndex : 0;
+        item.title = `第${rowLength + 1}行的第${colLength + 1}列`;
+        console.log(`${rowLength + 1}行,${colLength + 1}列`);
+        for (let i = 0; i <= rowLength; i++) {
+            let rowData = SpreadsheetApp.spreadsheet.activeSheet.data.rowData;
+            // SpreadsheetApp.spreadsheet.activeSheet.data.rowData[0].values[0]
+            // e 为该单元格详细的数据信息
+            let e = rowData ? rowData[startRowIndex + i].values[startColIndex] : null;
+            // 设置第n行的第一个
+            item.children.push([{ e, position: [startRowIndex + i, startColIndex] }]);
+            for (let j = 0; j < colLength; j++) {
+                let e = rowData ? rowData[startRowIndex + i].values[startColIndex + j + 1] : null;
+                // 设置第n行第二个之后的元素
+                item.children[i].push({
+                    e,
+                    position: [startRowIndex + i, startColIndex + j + 1]
+                });
+            }
+        }
+    });
+
+    // [0,2] 3行
+    // [0,1] 2列
+
+    // [
+    //     [[0,0],[0,1]],
+    //     [[1,0] [1,1]],
+    //     [[2,0] [2,1]]
+    // ]
+
+    // [].push()
+
+    // [0,2] 4行
+    // [0,1] 2列
+
+    // [0,0] [0,1]
+    // [1,0] [1,1]
+    // [2,0] [2,1]
+    // [3,0] [3,1]
+</script>

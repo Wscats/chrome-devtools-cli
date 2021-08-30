@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <textarea id="result" style="width:800px; height:600px; resize:none"></textarea>
+        <script>
+            var body = document.getElementsByTagName('body')[0];
+            body.addEventListener('copy', function(e) {
+                console.log(e)
+                // var clipboard = e.clipboardData;
+                // var type = clipboard.items[0].type;
+                // if (type.match(/image/)) {
+                //     var blob = clipboard.items[0].getAsFile();
+                //     var file = new FileReader();
+                //     file.addEventListener('loadend', function(e) {
+                //         document.getElementById('result').value = e.target.result;
+                //     });
+                //     file.readAsDataURL(blob);
+                // } else {
+                //     document.getElementById('result').value =
+                //         'not an image\ntype: ' + type + '\n\n';
+                // }
+            });
+        </script>
+    </body>
+</html>
